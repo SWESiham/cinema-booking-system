@@ -1,0 +1,142 @@
+.movie-details__hero {
+  height: 340px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.movie-details__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--color-bg), rgba(11, 11, 13, 0.3));
+}
+
+.movie-details__content {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
+  margin-top: -120px;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.movie-details__poster {
+  width: 220px;
+  border-radius: var(--radius-md);
+  border: 3px solid var(--color-bg);
+  box-shadow: var(--shadow-card);
+}
+
+.movie-details__info {
+  padding-top: 130px;
+}
+
+.movie-details__info h1 {
+  font-size: 2.6rem;
+  margin-bottom: 12px;
+}
+
+.movie-details__genres {
+  color: var(--color-text-faint);
+  font-size: 0.9rem;
+  margin: 14px 0 10px;
+}
+
+.movie-details__desc {
+  max-width: 640px;
+  font-size: 0.95rem;
+}
+
+.movie-details__booking {
+  padding: 40px 24px 80px;
+}
+
+.movie-details__dates {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.date-chip {
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.date-chip--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.movie-details__showtimes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.showtime-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 18px 20px;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.showtime-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+.showtime-card__time {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--color-text);
+  letter-spacing: 0.05em;
+}
+
+.showtime-card__cinema {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.showtime-card__hall {
+  font-size: 0.78rem;
+  color: var(--color-text-faint);
+}
+
+.showtime-card__price {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+@media (max-width: 700px) {
+  .movie-details__content {
+    grid-template-columns: 1fr;
+    margin-top: -80px;
+    text-align: center;
+  }
+  .movie-details__poster {
+    margin: 0 auto;
+    width: 160px;
+  }
+  .movie-details__info {
+    padding-top: 20px;
+  }
+  .hero__meta {
+    justify-content: center;
+  }
+}

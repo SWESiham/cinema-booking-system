@@ -1,0 +1,72 @@
+import React from "react";
+import { mockMovies } from "../data/mockData";
+import Button from "../components/common/Button";
+import { Link } from "react-router-dom";
+import MovieGrid from "./../components/movies/MovieGrid";
+import "./Home.css";
+const Home = () => {
+  const mMovies = mockMovies[0];
+  const nowShowing = mockMovies.slice(0, 5);
+  return (
+    <>
+      <div className="home">
+        <section
+          className="hero"
+          style={{ backgroundImage: `url(${mMovies.backdrop})` }}
+        >
+          <div className="hero__scrim"></div>
+          <div className="container hero__content">
+            <span className="hero__eyebrow">Now Showing</span>
+            <h1 className="hero__title">{mMovies.title}</h1>
+            <p className="hero__desc">{mMovies.description}</p>
+            <div className="hero__meta">
+              <span className="badge">★ {mMovies.rating}</span>
+              <span className="badge">{mMovies.ageRating}</span>
+              <span className="badge">{mMovies.duration} min</span>
+              <span className="badge">{mMovies.genre.join(" / ")}</span>
+            </div>
+
+            <div className="hero__actions">
+              <Button as={Link} to={`/movies/${mMovies.id}`} size="lg">
+                Book Tickets
+              </Button>
+              <Button as={Link} to={`/movies`} size="lg" variant="outline">
+                Browse All Movies
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <section className="container home__section">
+          <div className="home__section-head">
+            <h2 className="section-title">Now Showing</h2>
+            <Link to='/movies'  className="home__see-all">
+            See all →
+            </Link>
+          </div>
+            <MovieGrid movies={nowShowing} />
+        </section>
+
+        <section className="container home__perks">
+          <div className="perk">
+            <span className="perk__icon">🎟️</span>
+            <h3>Instant Booking</h3>
+            <p>Pick your seats and get your ticket in under a minute.</p>
+          </div>
+          <div className="perk">
+            <span className="perk__icon">🍿</span>
+            <h3>Premium Halls</h3>
+            <p>IMAX, VIP recliners, and Dolby sound across our cinemas.</p>
+          </div>
+          <div className="perk">
+            <span className="perk__icon">📍</span>
+            <h3>Multiple Locations</h3>
+            <p>Downtown, Mall of Arabia, and Nile View — always nearby.</p>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+};
+
+export default Home;
