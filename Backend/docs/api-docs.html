@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CineBook API Documentation</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --panel2: #16213a;
+    --border: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --get: #2563eb;   --post: #16a34a;  --put: #d97706;
+    --patch: #9333ea; --delete: #dc2626;
+    --accent: #a78bfa;
+    --ok: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
+  header.hero {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #581c87 100%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 28px 22px;
+    margin-bottom: 18px;
+  }
+  .hero h1 { font-size: 26px; letter-spacing: .3px; }
+  .hero p.sub { color: var(--muted); margin-top: 6px; max-width: 720px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .chip {
+    background: rgba(167,139,250,.12); color: var(--accent);
+    border: 1px solid rgba(167,139,250,.35);
+    font-size: 12px; padding: 3px 10px; border-radius: 999px; font-weight: 600;
+  }
+  .toolbar {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    padding: 14px 16px; margin-bottom: 24px;
+  }
+  .toolbar label { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .toolbar input {
+    flex: 1; min-width: 220px;
+    background: var(--panel2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px;
+    font-family: ui-monospace, Consolas, monospace; font-size: 13px;
+  }
+  .btn {
+    cursor: pointer; border: none; border-radius: 8px; padding: 8px 14px;
+    font-weight: 700; font-size: 13px; transition: filter .15s ease;
+  }
+  .btn:hover { filter: brightness(1.15); }
+  .btn.authorize { background: var(--ok); color: #052e12; }
+  .btn.clear { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .token-state { font-size: 12px; color: var(--muted); width: 100%; }
+  .token-state.ok { color: var(--ok); }
+
+  nav.toc {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px;
+  }
+  nav.toc a {
+    color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 600;
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 5px 12px; border-radius: 999px;
+  }
+  nav.toc a:hover { background: var(--panel2); }
+
+  h2.group {
+    font-size: 19px; margin: 34px 0 4px; display: flex; align-items: center; gap: 10px;
+    scroll-margin-top: 20px;
+  }
+  h2.group::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .group-desc { color: var(--muted); font-size: 13.5px; margin-bottom: 14px; }
+
+  details.endpoint {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left-width: 4px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  details.endpoint[data-method="GET"]     { border-left-color: var(--get); }
+  details.endpoint[data-method="POST"]    { border-left-color: var(--post); }
+  details.endpoint[data-method="PUT"]     { border-left-color: var(--put); }
+  details.endpoint[data-method="PATCH"]   { border-left-color: var(--patch); }
+  details.endpoint[data-method="DELETE"]  { border-left-color: var(--delete); }
+
+  details.endpoint > summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+    padding: 12px 16px;
+  }
+  details.endpoint > summary::-webkit-details-marker { display: none; }
+  summary .path { font-family: ui-monospace, Consolas, monospace; font-size: 14px; font-weight: 600; }
+  summary .summary-text { color: var(--muted); font-size: 13px; flex-basis: 100%; padding-left: 74px; margin-top: -6px; }
+  @media (max-width: 640px) { summary .summary-text { padding-left: 0; } }
+
+  .method {
+    font-size: 11px; font-weight: 800; letter-spacing: .6px;
+    color: #fff; border-radius: 6px; padding: 3px 9px; min-width: 62px; text-align: center;
+  }
+  .method.GET { background: var(--get); }      .method.POST { background: var(--post); }
+  .method.PUT { background: var(--put); }      .method.PATCH { background: var(--patch); }
+  .method.DELETE { background: var(--delete); }
+  .lock { font-size: 12px; color: var(--put); font-weight: 700; }
+
+  .endpoint-body { padding: 4px 18px 18px; border-top: 1px solid var(--border); }
+  .endpoint-body h4 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--muted); margin: 16px 0 8px;
+  }
+  table.params { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.params th { text-align: left; color: var(--muted); font-weight: 600; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--border); }
+  table.params td { padding: 7px 10px 7px 0; border-bottom: 1px solid rgba(51,65,85,.45); vertical-align: top; }
+  code.inline {
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 5px;
+    padding: 1px 6px; font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; color: var(--accent);
+  }
+  pre.example {
+    background: #0b1120; border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 14px; overflow-x: auto;
+    font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; line-height: 1.6;
+    color: #cbd5e1;
+  }
+  .try {
+    margin-top: 16px; background: var(--panel2); border: 1px dashed var(--border);
+    border-radius: 10px; padding: 14px;
+  }
+  .try .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .try input[type="text"], .try textarea {
+    background: #0b1120; color: var(--text); border: 1px solid var(--border); border-radius: 7px;
+    padding: 7px 10px; font-family: ui-monospace, Consolas, monospace; font-size: 12.5px;
+  }
+  .try input[type="text"] { flex: 2; min-width: 200px; }
+  .try textarea { width: 100%; min-height: 84px; resize: vertical; }
+  .try .execute { background: var(--accent); color: #1e1b4b; }
+  .result { margin-top: 10px; display: none; }
+  .result .status { font-size: 12.5px; font-weight: 700; margin-bottom: 6px; }
+  .status.s2xx { color: var(--ok); } .status.err { color: #f87171; }
+  .note {
+    background: rgba(217,119,6,.08); border: 1px solid rgba(217,119,6,.4);
+    color: #fbbf24; font-size: 13px; border-radius: 8px; padding: 10px 14px; margin: 14px 0 4px;
+  }
+  footer.creds {
+    margin-top: 40px; background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 20px; font-size: 13.5px; color: var(--muted);
+  }
+  footer.creds strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>CineBook API &mdash; Cinema Ticket Booking Platform</h1>
+    <p class="sub">REST backend for the React cinema-booking frontend. Node.js + Express with a <strong>JSON file database</strong>
+      (<code class="inline">data/db.json</code>) instead of a real database. All data survives restarts; delete the file to reset to seed data.</p>
+    <div class="badges">
+      <span class="chip">v1.0.0</span>
+      <span class="chip">JSON storage</span>
+      <span class="chip">Bearer auth</span>
+      <span class="chip">CORS: Vite dev server allowed</span>
+      <span class="chip">Base URL: http://localhost:4000</span>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <label for="baseUrl">Server</label>
+    <input id="baseUrl" type="text" value="" placeholder="http://localhost:4000" />
+    <button class="btn authorize" id="authorizeBtn">&#128274; Authorize</button>
+    <button class="btn clear" id="clearBtn">Clear token</button>
+    <span class="token-state" id="tokenState">No token set &mdash; protected endpoints will return 401.</span>
+  </div>
+
+  <nav class="toc">
+    <a href="#g-health">Health</a>
+    <a href="#g-auth">Auth</a>
+    <a href="#g-movies">Movies</a>
+    <a href="#g-genres">Genres</a>
+    <a href="#g-bookings">Bookings</a>
+    <a href="#g-users">Users</a>
+    <a href="#g-stats">Stats</a>
+  </nav>
+
+  <div class="note"><strong>Try it:</strong> click <em>Authorize</em>, log in with a demo account below, then use any endpoint's <em>Execute</em> button.
+    Demo accounts (password <code class="inline">password123</code>): <code class="inline">admin@cinebook.com</code> (Admin),
+    <code class="inline">staff@cinebook.com</code> (Staff), <code class="inline">emma@example.com</code> (Customer).</div>
+
+  <div id="endpoints"></div>
+
+  <footer class="creds">
+    <strong>Storage:</strong> <code class="inline">backend/data/db.json</code> &mdash; plain JSON file, auto-seeded on first run.<br />
+    <strong>Frontend wiring:</strong> call <code class="inline">http://localhost:4000/api/&hellip;</code> from React (Vite proxy optional).
+    Start the API with <code class="inline">npm start</code> inside <code class="inline">backend/</code>.
+  </footer>
+</div>
+
+<script src="api-data.js"></script>
+<script>
+(function () {
+  const $ = (sel, el = document) => el.querySelector(sel);
+
+  const baseUrlInput = $('#baseUrl');
+  baseUrlInput.value = location.protocol.startsWith('http') && location.port === '4000'
+    ? location.origin
+    : 'http://localhost:4000';
+
+  let token = localStorage.getItem('cinebook-token') || '';
+  const tokenState = $('#tokenState');
+  function paintTokenState() {
+    if (token) {
+      tokenState.textContent = 'Authorized \u2713 Bearer token stored (' + token.slice(0, 18) + '\u2026)';
+      tokenState.className = 'token-state ok';
+    } else {
+      tokenState.textContent = 'No token set \u2014 protected endpoints will return 401.';
+      tokenState.className = 'token-state';
+    }
+  }
+
+  async function doAuthorize() {
+    const email = prompt('Email:', 'admin@cinebook.com');
+    if (!email) return;
+    const password = prompt('Password:', 'password123');
+    if (!password) return;
+    try {
+      const res = await fetch(baseUrlInput.value.replace(/\/$/, '') + '/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.token) throw new Error(json.message || 'Login failed');
+      token = json.token;
+      localStorage.setItem('cinebook-token', token);
+      paintTokenState();
+    } catch (err) {
+      alert('Authorization failed: ' + err.message);
+    }
+  }
+
+  $('#authorizeBtn').addEventListener('click', doAuthorize);
+  $('#clearBtn').addEventListener('click', () => {
+    token = '';
+    localStorage.removeItem('cinebook-token');
+    paintTokenState();
+  });
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function paramTable(params) {
+    if (!params || !params.length) return '<p style="color:var(--muted);font-size:13px;">No parameters.</p>';
+    const rows = params.map((p) => `
+      <tr>
+        <td><code class="inline">${esc(p.name)}</code>${p.required ? ' <span style="color:#f87171;font-size:11px;">required</span>' : ''}</td>
+        <td>${esc(p.type)}</td>
+        <td style="color:var(--muted)">${esc(p.description)}</td>
+      </tr>`).join('');
+    return `<table class="params"><tr><th>Name</th><th>Type</th><th>Description</th></tr>${rows}</table>`;
+  }
+
+  function renderEndpoint(ep) {
+    const detailId = 'body-' + ep.id;
+    const hasBody = !!ep.bodyExample;
+    const html = `
+      <details class="endpoint" data-method="${ep.method}" id="${ep.id}">
+        <summary>
+          <span class="method ${ep.method}">${ep.method}</span>
+          <span class="path">${esc(ep.path)}</span>
+          ${ep.auth ? '<span class="lock" title="Requires Bearer token">&#128274;' + esc(ep.auth) + '</span>' : ''}
+          <span class="summary-text">${esc(ep.summary)}</span>
+        </summary>
+        <div class="endpoint-body">
+          ${ep.description ? `<p style="font-size:13.5px;color:var(--text)">${esc(ep.description)}</p>` : ''}
+
+          <h4>Parameters${ep.params ? '' : ' &amp; body'}</h4>
+          ${paramTable(ep.params)}
+
+          ${hasBody ? `
+            <h4>Request body <span style="color:var(--muted);text-transform:none;">(application/json)</span></h4>
+            <pre class="example">${esc(JSON.stringify(ep.bodyExample, null, 2))}</pre>` : ''}
+
+          <h4>Responses</h4>
+          ${ep.responses.map((r) => `
+            <p style="font-size:13px;margin-bottom:4px;">
+              <span style="color:${String(r.status).startsWith('2') ? 'var(--ok)' : '#f87171'};font-weight:700;">${r.status}</span>
+              <span style="color:var(--muted)"> &mdash; ${esc(r.description)}</span>
+            </p>
+            ${r.example !== undefined ? `<pre class="example">${esc(typeof r.example === 'string' ? r.example : JSON.stringify(r.example, null, 2))}</pre>` : ''}`).join('')}
+
+          <div class="try">
+            <div class="row">
+              <input type="text" placeholder="${esc(ep.path)}" value="${esc(ep.path)}" data-role="url" />
+              <button class="btn execute" data-role="exec">Execute</button>
+            </div>
+            ${ep.params && ep.params.some((p) => !p.in || p.in === 'query')
+              ? `<div class="row"><input type="text" placeholder="query string, e.g. q=thunder&genre=Action" data-role="qs" /></div>` : ''}
+            ${hasBody ? `<textarea data-role="body">${esc(JSON.stringify(ep.bodyExample, null, 2))}</textarea>` : ''}
+            <div class="result" data-role="result">
+              <div class="status" data-role="status"></div>
+              <pre class="example" data-role="output"></pre>
+            </div>
+          </div>
+        </div>
+      </details>`;
+    return html;
+  }
+
+  const mount = $('#endpoints');
+  let lastGroup = null;
+  let htmlOut = '';
+  for (const ep of ENDPOINTS) {
+    if (ep.group !== lastGroup) {
+      htmlOut += `<h2 class="group" id="g-${ep.tag}">${esc(ep.group)}</h2>`;
+      htmlOut += ep.groupDesc ? `<p class="group-desc">${esc(ep.groupDesc)}</p>` : '';
+      lastGroup = ep.group;
+    }
+    htmlOut += renderEndpoint(ep);
+  }
+  mount.innerHTML = htmlOut;
+
+  mount.addEventListener('click', async (event) => {
+    const btn = event.target.closest('button[data-role="exec"]');
+    if (!btn) return;
+    const detailsEl = btn.closest('.endpoint');
+    const ep = ENDPOINTS.find((e) => e.id === detailsEl.id);
+    const urlTemplate = $('[data-role="url"]', detailsEl).value.trim();
+    const qs = $('[data-role="qs"]', detailsEl);
+    const bodyTa = $('[data-role="body"]', detailsEl);
+    const result = $('[data-role="result"]', detailsEl);
+    const statusEl = $('[data-role="status"]', detailsEl);
+    const output = $('[data-role="output"]', detailsEl);
+
+    let url = urlTemplate;
+    const queryParams = qs && qs.value.trim() ? qs.value.trim().replace(/^\??/, '') : '';
+    if (queryParams) url += (url.includes('?') ? '&' : '?') + queryParams;
+
+    const options = { method: ep.method, headers: {} };
+    if (token) options.headers.Authorization = 'Bearer ' + token;
+    if (ep.bodyExample && bodyTa) {
+      options.headers['Content-Type'] = 'application/json';
+      options.body = bodyTa.value;
+    }
+
+    result.style.display = 'block';
+    statusEl.className = 'status';
+    statusEl.textContent = 'Sending\u2026';
+    output.textContent = '';
+
+    try {
+      const fullUrl = baseUrlInput.value.replace(/\/$/, '') + url;
+      const res = await fetch(fullUrl, options);
+      const text = await res.text();
+      let pretty = text;
+      try { pretty = JSON.stringify(JSON.parse(text), null, 2); } catch { /* keep raw */ }
+      statusEl.textContent = `${res.status} ${res.statusText} \u2014 ${ep.method} ${fullUrl}`;
+      statusEl.className = 'status ' + (res.ok ? 's2xx' : 'err');
+      output.textContent = pretty || '(empty response)';
+    } catch (err) {
+      statusEl.textContent = 'Network error \u2014 is the API running?';
+      statusEl.className = 'status err';
+      output.textContent = String(err);
+    }
+  });
+
+  paintTokenState();
+})();
+</script>
+</body>
+</html>

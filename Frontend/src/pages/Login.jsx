@@ -1,36 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/common/Button";
-import { useAuth } from "../context/AuthContext";
+import {useAuth } from "../context/AuthContext.jsx";
+import api from "../services/api";
 
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [form, setForm] = useState({ email: "", password: "" });
-  const {login} = useAuth()
+  const { login } = useAuth();
   const handleChange = (e) => {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     setError("");
     if (!form.email || !form.password) {
       setError("Please fill in both fields.");
       return;
     }
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log(`${form.email}    =>>  ${user.email}`);
+    // const user = JSON.parse(localStorage.getItem("user"));
+    // console.log(`${form.email}    =>>  ${user.email}`);
 
-    if (form.email !== user.email || form.password !== user.password) {
-      console.log("we here");
-      setError("Invalid email or password");
-      return;
-    }
-      login(user)
-      navigate("/");
+    // if (form.email !== user.email || form.password !== user.password) {
+    //   // console.log("we here");
+    //   setError("Invalid email or password");
+    //   return;
+    // }
+      // login(user)
+      // navigate("/");
     
+    const res = await login(form.email, form.password);
+    res.success ? navigate('/') : setError(res.message);
   };
   return (
     <>

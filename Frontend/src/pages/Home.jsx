@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { mockMovies } from "../data/mockData";
 import Button from "../components/common/Button";
 import { Link } from "react-router-dom";
 import MovieGrid from "./../components/movies/MovieGrid";
+import api from "../services/api";
 import "./Home.css";
+import { useState } from "react";
+import Loader from "../components/common/Loader";
 const Home = () => {
-  const mMovies = mockMovies[0];
-  const nowShowing = mockMovies.slice(0, 5);
-  return (
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const res = await api.get("/movies");
+        console.log(res.data);
+        setMovies(res.data.movies);
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to fetch movies");
+        setLoading(false);
+      }
+    };
+    fetchMovies();
+  }, []);
+  const nowShowing = movies.slice(0, 15);
+  const mMovies = movies[0];
+ if (loading) return <div className="container movies-page"><Loader/></div>;
+  if (error) return <div className="container movies-page"><h2 style={{ color: 'red' }}>{error}</h2></div>;
+   return (
     <>
       <div className="home">
         <section
@@ -40,11 +63,11 @@ const Home = () => {
         <section className="container home__section">
           <div className="home__section-head">
             <h2 className="section-title">Now Showing</h2>
-            <Link to='/movies'  className="home__see-all">
-            See all →
+            <Link to="/movies" className="home__see-all">
+              See all →
             </Link>
           </div>
-            <MovieGrid movies={nowShowing} />
+          <MovieGrid movies={nowShowing} />
         </section>
 
         <section className="container home__perks">

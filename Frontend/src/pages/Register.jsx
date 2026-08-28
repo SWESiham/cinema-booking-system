@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Auth.css";
-import Button from './../components/common/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import Button from "./../components/common/Button";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 const Register = () => {
   const [form, setForm] = useState({
     fullName: "",
@@ -11,11 +12,13 @@ const Register = () => {
   });
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const { register } = useAuth();
+
   const handleChange = (e) => {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     setError("");
 
@@ -27,10 +30,10 @@ const Register = () => {
       setError("Passwords do not match.");
       return;
     }
-
-    localStorage.setItem('user',JSON.stringify({name:form.fullName,email:form.email,password:form.password}))
-
-    navigate("/login");
+    // localStorage.setItem('user',JSON.stringify({name:form.fullName,email:form.email,password:form.password}))
+    const res = await register(form.fullName, form.email, form.password);
+    res.success ? navigate("/login") : setError(res.message);
+    
   };
   return (
     <>

@@ -53,7 +53,7 @@ const Seats = () => {
           bSeats={bSeats}
           price={swtime.price}
           hallNum={swtime.hall}
-          maxSeats={swtime.hall === 1 ? 10 : 8}
+          maxSeats={swtime.hall % 2 === 1 ? 10 : 8}
           onSelChange={(seats, seatsTotal) => {
             setSSeats(seats);
             setTotal(seatsTotal);

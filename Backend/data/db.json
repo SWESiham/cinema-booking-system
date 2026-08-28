@@ -1,0 +1,622 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "Nebula Horizon",
+      "genre": [
+        "Sci-Fi",
+        "Action"
+      ],
+      "duration": 138,
+      "rating": 8.4,
+      "ageRating": "PG-13",
+      "poster": "https://picsum.photos/seed/nebula/400/600",
+      "backdrop": "https://picsum.photos/seed/nebula-wide/1200/500",
+      "description": "A deep-space crew discovers a signal older than the universe itself — and must decide whether to answer it.",
+      "language": "English",
+      "director": "Wei Zhang",
+      "price": 160,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 2,
+      "title": "Crimson Alley",
+      "genre": [
+        "Action",
+        "Thriller"
+      ],
+      "duration": 112,
+      "rating": 7.6,
+      "ageRating": "16+",
+      "poster": "https://picsum.photos/seed/crimson/400/600",
+      "backdrop": "https://picsum.photos/seed/crimson-wide/1200/500",
+      "description": "A detective with nothing left to lose hunts a killer who only strikes on rainy nights.",
+      "language": "English",
+      "director": "James Morton",
+      "price": 220,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 3,
+      "title": "The Last Orchard",
+      "genre": [
+        "Drama",
+        "Family"
+      ],
+      "duration": 124,
+      "rating": 8.9,
+      "ageRating": "PG",
+      "poster": "https://picsum.photos/seed/orchard/400/600",
+      "backdrop": "https://picsum.photos/seed/orchard-wide/1200/500",
+      "description": "Three siblings return to their childhood farm one last summer before it is sold.",
+      "language": "Arabic",
+      "director": "Alexander Knight",
+      "price": 140,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 4,
+      "title": "Dilwale's Journey",
+      "genre": [
+        "Romance",
+        "Drama"
+      ],
+      "duration": 155,
+      "rating": 9.1,
+      "ageRating": "PG",
+      "poster": "https://picsum.photos/seed/dilwale/400/600",
+      "backdrop": "https://picsum.photos/seed/dilwale-wide/1200/500",
+      "description": "Two strangers meet on a train across Europe, forging a bond that challenges their family traditions and changes their lives forever.",
+      "language": "Hindi",
+      "director": "Rajesh Kumar",
+      "price": 180,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 5,
+      "title": "Seoul Spring",
+      "genre": [
+        "Drama",
+        "Comedy"
+      ],
+      "duration": 110,
+      "rating": 8.5,
+      "ageRating": "PG",
+      "poster": "https://picsum.photos/seed/seoul/400/600",
+      "backdrop": "https://picsum.photos/seed/seoul-wide/1200/500",
+      "description": "Three childhood friends navigate the complexities of life, careers, and gentle romance while running a cozy coffee shop in modern-day Seoul.",
+      "language": "Korean",
+      "director": "Min-ji Park",
+      "price": 150,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 6,
+      "title": "Beijing Blossoms",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "duration": 118,
+      "rating": 8.2,
+      "ageRating": "PG",
+      "poster": "https://picsum.photos/seed/beijing/400/600",
+      "backdrop": "https://picsum.photos/seed/beijing-wide/1200/500",
+      "description": "A slice-of-life story about female friendship, healing from past wounds, and finding peace in the quiet moments of everyday life.",
+      "language": "Mandarin",
+      "director": "Li Wei",
+      "price": 150,
+      "status": "coming_soon",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 7,
+      "title": "Summer of '98",
+      "genre": [
+        "Romance",
+        "Comedy"
+      ],
+      "duration": 140,
+      "rating": 8.8,
+      "ageRating": "PG",
+      "poster": "https://picsum.photos/seed/summer98/400/600",
+      "backdrop": "https://picsum.photos/seed/summer98-wide/1200/500",
+      "description": "Best friends realize their true feelings for each other years after college, but timing is never on their side.",
+      "language": "Hindi",
+      "director": "A. Singh",
+      "price": 190,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 8,
+      "title": "Second Glance",
+      "genre": [
+        "Romance",
+        "Drama"
+      ],
+      "duration": 125,
+      "rating": 8.6,
+      "ageRating": "PG-13",
+      "poster": "https://picsum.photos/seed/glance/400/600",
+      "backdrop": "https://picsum.photos/seed/glance-wide/1200/500",
+      "description": "An arrogant business tycoon and a cheerful, strong-willed woman cross paths, sparking a rivalry that slowly turns into undeniable love.",
+      "language": "Hindi",
+      "director": "S. Sharma",
+      "price": 170,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 9,
+      "title": "Cyber City 2099",
+      "genre": [
+        "Sci-Fi",
+        "Action",
+        "Thriller"
+      ],
+      "duration": 145,
+      "rating": 8,
+      "ageRating": "16+",
+      "poster": "https://picsum.photos/seed/cyber/400/600",
+      "backdrop": "https://picsum.photos/seed/cyber-wide/1200/500",
+      "description": "In a dystopian metropolis, a rogue hacker tries to bring down the megacorporation controlling the city's resources.",
+      "language": "English",
+      "director": "Elena Rostova",
+      "price": 250,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 10,
+      "title": "The Laughing Ghost",
+      "genre": [
+        "Comedy",
+        "Horror"
+      ],
+      "duration": 95,
+      "rating": 6.8,
+      "ageRating": "PG-13",
+      "poster": "https://picsum.photos/seed/ghost/400/600",
+      "backdrop": "https://picsum.photos/seed/ghost-wide/1200/500",
+      "description": "A family moves into a haunted house, only to discover the resident ghost is more interested in stand-up comedy than scaring them.",
+      "language": "English",
+      "director": "Mark Hamil",
+      "price": 130,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 11,
+      "title": "Galactic Pioneers",
+      "genre": [
+        "Animation",
+        "Sci-Fi",
+        "Family"
+      ],
+      "duration": 105,
+      "rating": 8.7,
+      "ageRating": "G",
+      "poster": "https://picsum.photos/seed/galactic/400/600",
+      "backdrop": "https://picsum.photos/seed/galactic-wide/1200/500",
+      "description": "An animated adventure following a group of misfit aliens trying to find their way back to their home galaxy.",
+      "language": "English",
+      "director": "Sarah Jenkins",
+      "price": 160,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 12,
+      "title": "Echoes in the Dark",
+      "genre": [
+        "Horror",
+        "Thriller"
+      ],
+      "duration": 115,
+      "rating": 7.2,
+      "ageRating": "18+",
+      "poster": "https://picsum.photos/seed/echoes/400/600",
+      "backdrop": "https://picsum.photos/seed/echoes-wide/1200/500",
+      "description": "A group of friends exploring an abandoned asylum realize they are not alone, and the echoes of the past are very real.",
+      "language": "English",
+      "director": "Victor Draven",
+      "price": 180,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 13,
+      "title": "The Great Desert Heist",
+      "genre": [
+        "Action",
+        "Comedy"
+      ],
+      "duration": 122,
+      "rating": 7.9,
+      "ageRating": "PG-13",
+      "poster": "https://picsum.photos/seed/heist/400/600",
+      "backdrop": "https://picsum.photos/seed/heist-wide/1200/500",
+      "description": "A team of amateur thieves attempts to pull off the biggest casino heist in Las Vegas during a massive sandstorm.",
+      "language": "English",
+      "director": "Omar Fayed",
+      "price": 190,
+      "status": "coming_soon",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 14,
+      "title": "Whispers of the Nile",
+      "genre": [
+        "Drama",
+        "Thriller"
+      ],
+      "duration": 130,
+      "rating": 8.1,
+      "ageRating": "16+",
+      "poster": "https://picsum.photos/seed/nile/400/600",
+      "backdrop": "https://picsum.photos/seed/nile-wide/1200/500",
+      "description": "An archaeologist uncovers a secret that threatens to rewrite ancient history, making her a target for secret societies.",
+      "language": "Arabic",
+      "director": "Amir Hassan",
+      "price": 150,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 15,
+      "title": "Jungle Safari 3D",
+      "genre": [
+        "Animation",
+        "Comedy",
+        "Family"
+      ],
+      "duration": 98,
+      "rating": 7.5,
+      "ageRating": "G",
+      "poster": "https://picsum.photos/seed/jungle/400/600",
+      "backdrop": "https://picsum.photos/seed/jungle-wide/1200/500",
+      "description": "A pampered zoo lion must learn to survive in the wild when he is accidentally shipped to the African savanna.",
+      "language": "English",
+      "director": "Leo Wild",
+      "price": 140,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 16,
+      "title": "Midnight Drift",
+      "genre": [
+        "Action"
+      ],
+      "duration": 108,
+      "rating": 6.9,
+      "ageRating": "PG-13",
+      "poster": "https://picsum.photos/seed/drift/400/600",
+      "backdrop": "https://picsum.photos/seed/drift-wide/1200/500",
+      "description": "Underground street racers go head-to-head in Tokyo's dangerous mountain passes.",
+      "language": "Japanese",
+      "director": "Kenji Sato",
+      "price": 200,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 17,
+      "title": "The Quiet Room",
+      "genre": [
+        "Horror"
+      ],
+      "duration": 100,
+      "rating": 7.8,
+      "ageRating": "18+",
+      "poster": "https://picsum.photos/seed/quiet/400/600",
+      "backdrop": "https://picsum.photos/seed/quiet-wide/1200/500",
+      "description": "If you make a sound, it finds you. A terrifying survival horror set in a secluded cabin in the woods.",
+      "language": "English",
+      "director": "Anna Brooks",
+      "price": 210,
+      "status": "coming_soon",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 18,
+      "title": "Caged Bird",
+      "genre": [
+        "Drama"
+      ],
+      "duration": 142,
+      "rating": 9,
+      "ageRating": "16+",
+      "poster": "https://picsum.photos/seed/bird/400/600",
+      "backdrop": "https://picsum.photos/seed/bird-wide/1200/500",
+      "description": "A gripping tale of resilience and freedom, following a young musician escaping a restrictive environment to chase her dreams.",
+      "language": "English",
+      "director": "Samira Ahmed",
+      "price": 160,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 19,
+      "title": "Robo-Copters",
+      "genre": [
+        "Action",
+        "Sci-Fi",
+        "Comedy"
+      ],
+      "duration": 112,
+      "rating": 6.5,
+      "ageRating": "PG-13",
+      "poster": "https://picsum.photos/seed/robo/400/600",
+      "backdrop": "https://picsum.photos/seed/robo-wide/1200/500",
+      "description": "Half-robot, half-helicopter law enforcement officers take to the skies to stop a ridiculous supervillain.",
+      "language": "English",
+      "director": "Chris Bay",
+      "price": 120,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    },
+    {
+      "id": 20,
+      "title": "Autumn Leaves",
+      "genre": [
+        "Romance",
+        "Drama"
+      ],
+      "duration": 118,
+      "rating": 8.3,
+      "ageRating": "PG",
+      "poster": "https://picsum.photos/seed/autumn/400/600",
+      "backdrop": "https://picsum.photos/seed/autumn-wide/1200/500",
+      "description": "Two writers fall in love over letters sent across the country, but must eventually face the reality of meeting in person.",
+      "language": "English",
+      "director": "Nora Ephron",
+      "price": 150,
+      "status": "now_showing",
+      "createdAt": "2026-08-28T18:44:52.651Z",
+      "updatedAt": "2026-08-28T18:44:52.651Z"
+    }
+  ],
+  "genres": [
+    {
+      "id": "action",
+      "title": "Action",
+      "count": 0,
+      "description": "High-octane thrills."
+    },
+    {
+      "id": "comedy",
+      "title": "Comedy",
+      "count": 0,
+      "description": "Laughs and fun."
+    },
+    {
+      "id": "drama",
+      "title": "Drama",
+      "count": 0,
+      "description": "Emotional stories."
+    },
+    {
+      "id": "horror",
+      "title": "Horror",
+      "count": 0,
+      "description": "Scares and suspense."
+    },
+    {
+      "id": "sci-fi",
+      "title": "Sci-Fi",
+      "count": 0,
+      "description": "Futuristic worlds."
+    },
+    {
+      "id": "animation",
+      "title": "Animation",
+      "count": 0,
+      "description": "Animated features."
+    },
+    {
+      "id": "romance",
+      "title": "Romance",
+      "count": 0,
+      "description": "Love and relationships."
+    },
+    {
+      "id": "thriller",
+      "title": "Thriller",
+      "count": 0,
+      "description": "Edge of your seat tension."
+    },
+    {
+      "id": "family",
+      "title": "Family",
+      "count": 0,
+      "description": "Suitable for all ages."
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin User",
+      "email": "admin@cinebook.com",
+      "password": "004455f29e65e9e36aaa6e4bcc63dd27:1d2eafbebd5cecadd8b5fcfad547b8a1df2ce71ff5c6e88c4401c834f86b65f84ad88a5f58edfdb9fd11b86a82d89404261c4a4b1d1a5c7ec06e5713de4919d1",
+      "role": "Admin",
+      "status": "Active",
+      "joined": "Aug 12, 2026",
+      "bio": "CineBook platform administrator."
+    },
+    {
+      "id": 2,
+      "name": "Siham",
+      "email": "siham@example.com",
+      "password": "c1756efc71b1ba81b94af76231d0fcd2:0b7b57f9c4958234ecc32eecaade9bb4e6f02d855fe91e1d4b6855e22e06d3b907d5b5e907a9c24cda52204648bd4517039290d5b394dddff1c0027ca96fed2a",
+      "role": "Customer",
+      "status": "Active",
+      "joined": "Aug 26, 2026",
+      "bio": ""
+    }
+  ],
+  "halls": {
+    "1": {
+      "name": "Hall 1 (Standard)",
+      "rows": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H"
+      ],
+      "cols": 10
+    },
+    "2": {
+      "name": "Hall 2 (VIP)",
+      "rows": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "cols": 8
+    }
+  },
+  "showtimes": [
+    {
+      "id": "s1",
+      "movieId": 1,
+      "cinema": "CineBook Downtown",
+      "hall": 1,
+      "date": "2026-08-25",
+      "time": "18:30",
+      "price": 160
+    },
+    {
+      "id": "s2",
+      "movieId": 1,
+      "cinema": "CineBook Nile View",
+      "hall": 2,
+      "date": "2026-08-25",
+      "time": "21:15",
+      "price": 240
+    },
+    {
+      "id": "s3",
+      "movieId": 2,
+      "cinema": "CineBook Downtown",
+      "hall": 2,
+      "date": "2026-08-25",
+      "time": "17:00",
+      "price": 220
+    },
+    {
+      "id": "s4",
+      "movieId": 2,
+      "cinema": "CineBook Nile View",
+      "hall": 1,
+      "date": "2026-08-26",
+      "time": "22:00",
+      "price": 150
+    },
+    {
+      "id": "s5",
+      "movieId": 3,
+      "cinema": "CineBook Nile View",
+      "hall": 1,
+      "date": "2026-08-25",
+      "time": "16:15",
+      "price": 140
+    },
+    {
+      "id": "s6",
+      "movieId": 4,
+      "cinema": "CineBook Downtown",
+      "hall": 1,
+      "date": "2026-08-25",
+      "time": "19:00",
+      "price": 180
+    },
+    {
+      "id": "s7",
+      "movieId": 5,
+      "cinema": "CineBook Nile View",
+      "hall": 2,
+      "date": "2026-08-26",
+      "time": "14:30",
+      "price": 150
+    },
+    {
+      "id": "s8",
+      "movieId": 7,
+      "cinema": "CineBook Downtown",
+      "hall": 1,
+      "date": "2026-08-26",
+      "time": "20:00",
+      "price": 190
+    },
+    {
+      "id": "s9",
+      "movieId": 8,
+      "cinema": "CineBook Nile View",
+      "hall": 2,
+      "date": "2026-08-25",
+      "time": "21:00",
+      "price": 170
+    },
+    {
+      "id": "s10",
+      "movieId": 9,
+      "cinema": "CineBook Downtown",
+      "hall": 2,
+      "date": "2026-08-26",
+      "time": "23:00",
+      "price": 250
+    },
+    {
+      "id": "s11",
+      "movieId": 11,
+      "cinema": "CineBook Nile View",
+      "hall": 1,
+      "date": "2026-08-27",
+      "time": "10:00",
+      "price": 160
+    },
+    {
+      "id": "s12",
+      "movieId": 14,
+      "cinema": "CineBook Downtown",
+      "hall": 1,
+      "date": "2026-08-27",
+      "time": "18:00",
+      "price": 150
+    }
+  ],
+  "bookings": []
+}

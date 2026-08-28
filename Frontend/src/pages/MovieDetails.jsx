@@ -1,24 +1,66 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import "./MovieDetails.css";
-import { getMovieById, getShowtimesByMovie } from "../data/mockData";
+import api from "../services/api";
+// import { getMovieById, getShowtimesByMovie } from "../data/mockData";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import Loader from "./../components/common/Loader";
 const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const movie = getMovieById(id);
+  // const movie = getMovieById(id);
   // geb el swtime b id bt3 el movies lma el id bs yt4er
-  const allShowtimes = useMemo(() => getShowtimesByMovie(id), [id]);
+  const [movie, setMovie] = useState(null);
+  const [allShowtimes, setAllShwTimes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // const allShowtimes = useMemo(() => getShowtimesByMovie(id), [id]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [movieRes, shwtimeRes] = await Promise.all([
+          api.get(`/movies/${id}`),
+          api.get(`/showtimes?movieId=${id}`),
+        ]);
+        console.log(movieRes.data.movie);
+        console.log(shwtimeRes.data.showtimes);
+        setMovie(movieRes.data.movie);
+        setAllShwTimes(shwtimeRes.data.showtimes);
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to load details");
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [id]);
   const dates = useMemo(
     () => [...new Set(allShowtimes.map((s) => s.date))].sort(),
     [allShowtimes],
   );
 
   const [aDate, setADate] = useState(dates[0]);
+  useEffect(() => {
+    if (dates.length > 0 && !aDate) {
+      setADate(dates[0]);
+    }
+  }, [dates, aDate]);
+
+  if (loading)
+    return (
+      <div className="container" style={{ padding: "100px" }}>
+        <Loader />
+      </div>
+    );
+  if (error)
+    return (
+      <div className="container" style={{ padding: "100px", color: "red" }}>
+        <h2>{error}</h2>
+      </div>
+    );
   if (!movie) {
     return <Navigate to="/movies" replace />;
   }
-
   const swtimefrDate = allShowtimes.filter((s) => s.date === aDate);
 
   return (
@@ -56,21 +98,21 @@ const MovieDetails = () => {
             <p>No showtimes scheduled for this movie yet.</p>
           ) : (
             <>
-             <div className="movie-details__dates">
-          {dates.map((d) => (
-            <button
-              key={d}
-              className={`date-chip ${aDate === d ? "date-chip--active" : ""}`}
-              onClick={() => setADate(d)}
-            >
-              {new Date(d).toLocaleDateString("en-US", {
-                weekday: "short",
-                month: "short",
-                day: "numeric",
-              })}
-            </button>
-          ))}
-        </div>
+              <div className="movie-details__dates">
+                {dates.map((d) => (
+                  <button
+                    key={d}
+                    className={`date-chip ${aDate === d ? "date-chip--active" : ""}`}
+                    onClick={() => setADate(d)}
+                  >
+                    {new Date(d).toLocaleDateString("en-US", {
+                      weekday: "short",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </button>
+                ))}
+              </div>
 
               <div className="movie-details__showtimes">
                 {swtimefrDate.map((s) => (
@@ -85,14 +127,13 @@ const MovieDetails = () => {
                     <span className="showtime-card__price">{s.price} EGP</span>
                   </button>
                 ))}
-          
               </div>
             </>
           )}
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default MovieDetails;
