@@ -22,26 +22,19 @@ const Seats = () => {
   const [bSeats, setBSeats] = useState([]);
   const [sSeats, setSSeats] = useState([]);
   const [total, setTotal] = useState(0);
-  useEffect(() => {
+ useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
+        
         const shwtimeRes = await api.get(`/showtimes/${showtimeId}`);
         const fshwtime = shwtimeRes.data.showtime;
+        
         setShwtime(fshwtime);
-        const [moiveRes, bookedRes] = await Promise.all([
-          api.get(`/movies/${fshwtime.movieId}`),
-          api
-            .get(`/showtimes/${showtimeId}/seats`)
-            .catch(() => ({ data: { bookedSeats: [] } })),
-        ]);
+        setBSeats(shwtimeRes.data.bookedSeats || []); 
 
-        // const bookedRes = await api.get(`/showtimes/${showtimeId}/seats`).catch(() => ({ data: { bookedSeats: [] } }));
+        const moiveRes = await api.get(`/movies/${fshwtime.movieId}`);
         setMovie(moiveRes.data.movie);
-        setBSeats(bookedRes.data.bookedSeats);
-        console.log(moiveRes.data.movie);
-
-        console.log(bookedRes.data);
 
         setLoading(false);
       } catch (error) {
@@ -49,9 +42,9 @@ const Seats = () => {
         setLoading(false);
       }
     };
+    
     fetchData();
   }, [showtimeId]);
-
   if (loading) {
     return (
       <div
@@ -83,6 +76,8 @@ const Seats = () => {
         showtimeId,
         sSeats,
         total,
+        movie,
+        swtime,
       },
     });
   };

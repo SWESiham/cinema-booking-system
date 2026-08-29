@@ -478,6 +478,16 @@
       "status": "Active",
       "joined": "Aug 26, 2026",
       "bio": ""
+    },
+    {
+      "id": 3,
+      "name": "Siham Said",
+      "email": "s@g.c",
+      "password": "94bc838b22908bab6c30ec66b2a765e5:4f751484f362d23245dacc5cd5c81ed304916a56cfe62efe2f75d830fbb444e80cfecffdfea380d365e5334f8ca428ccc2a8b9a3c6b99b9bf279f65360ccea66",
+      "role": "Customer",
+      "status": "Active",
+      "joined": "Aug 29, 2026",
+      "bio": ""
     }
   ],
   "halls": {
@@ -618,5 +628,87 @@
       "price": 150
     }
   ],
-  "bookings": []
+  "bookings": [
+    {
+      "id": "b-mtekennq-3qbd",
+      "userId": 3,
+      "showtimeId": "s11",
+      "movieId": 11,
+      "movieTitle": "Galactic Pioneers",
+      "hall": 1,
+      "seats": [
+        "C4",
+        "C5",
+        "C6"
+      ],
+      "pricePerSeat": 160,
+      "totalPrice": 480,
+      "status": "confirmed",
+      "createdAt": "2026-08-29T15:58:20.486Z",
+      "updatedAt": "2026-08-29T15:58:20.489Z"
+    },
+    {
+      "id": "b-mtelkunz-bz00",
+      "userId": 3,
+      "showtimeId": "s2",
+      "movieId": 1,
+      "movieTitle": "Nebula Horizon",
+      "hall": 2,
+      "seats": [
+        "D5",
+        "D4"
+      ],
+      "pricePerSeat": 240,
+      "totalPrice": 480,
+      "status": "confirmed",
+      "createdAt": "2026-08-29T16:31:09.119Z",
+      "updatedAt": "2026-08-29T16:31:09.119Z"
+    },
+    {
+      "id": "b-mtelqn0x-hems",
+      "userId": 3,
+      "showtimeId": "s2",
+      "movieId": 1,
+      "movieTitle": "Nebula Horizon",
+      "hall": 2,
+      "seats": [
+        "E5",
+        "E6"
+      ],
+      "pricePerSeat": 240,
+      "totalPrice": 480,
+      "status": "confirmed",
+      "createdAt": "2026-08-29T16:35:39.153Z",
+      "updatedAt": "2026-08-29T16:35:39.153Z"
+    },
+    {
+      "id": "b-mtem876k-c5lm",
+      "userId": 3,
+      "showtimeId": "s6",
+      "movieId": 4,
+      "movieTitle": "Dilwale's Journey",
+      "movieImage": "https://picsum.photos/seed/dilwale/400/600",
+      "cinema": "CineBook Downtown",
+      "hall": 1,
+      "date": "2026-08-25",
+      "time": "19:00",
+      "seats": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "A7",
+        "A8",
+        "A9",
+        "A10"
+      ],
+      "pricePerSeat": 180,
+      "totalPrice": 1800,
+      "status": "confirmed",
+      "createdAt": "2026-08-29T16:49:18.428Z",
+      "updatedAt": "2026-08-29T16:49:18.428Z"
+    }
+  ]
 }
