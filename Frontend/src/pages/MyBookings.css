@@ -102,3 +102,29 @@
     text-align: right;
   }
 }
+.booking-card__action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.booking-card__action button,
+.booking-card__action .btn {
+  background-color: rgba(230, 57, 70, 0.1) !important;
+  color: #e63946 !important;
+  border: 1px solid rgba(230, 57, 70, 0.3) !important;
+  padding: 5px 14px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.booking-card__action button:hover,
+.booking-card__action .btn:hover {
+  background-color: #e63946 !important;
+  color: #ffffff !important;
+  border-color: #e63946 !important;
+}

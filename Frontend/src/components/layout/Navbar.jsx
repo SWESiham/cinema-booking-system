@@ -40,20 +40,60 @@ export const Navbar = () => {
             >
               Home
             </NavLink> */}
-            {navLinks.map((link) => (
+            {user?.role !== 'Admin' ? (
+              <>
               <NavLink
-                to={link.to}
-                key={link.to}
-                end={link.end}
+                to={'/'}
                 className={({ isActive }) =>
                   `navbar__link ${isActive ? "navbar__link--active" : ""}`
                 }
                 onClick={() => setIsOpen(false)}
               >
-                {link.label}
+                Home
               </NavLink>
-            ))}
+              <NavLink
+                to={'/movies'}
+                className={({ isActive }) =>
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Movies
+              </NavLink>
+              <NavLink
+                to={'/my-bookings'}
+                className={({ isActive }) =>
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                My Bookings
+              </NavLink>
+              </>
+            ) : (
+              <>
 
+                <NavLink
+                to={'/'}
+                className={({ isActive }) =>
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Home
+              </NavLink>
+                <NavLink
+                to={'/admin'}
+                className={({ isActive }) =>
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                Dashboard
+              </NavLink>
+              </>
+                )
+          }
             
             {!user ? (
               <div className="navbar__auth">

@@ -31,7 +31,7 @@ const Checkout = () => {
         seats,
         totalAmount,
       });
-      navigate("/my-bookings");
+      navigate('/my-bookings', { state: { justBooked: true } });
     } catch (error) {
       console.error(error);
       setIsSubmiting(false);

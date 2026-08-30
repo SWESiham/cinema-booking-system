@@ -6,15 +6,16 @@ import "./App.css";
 import { Navbar } from "./components/layout/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/layout/Footer.jsx";
-import Home from './pages/Home'
-import Register from './pages/Register'
-import Login from './pages/Login'
-import Movies from './pages/Movies'
-import MovieDetails from './pages/MovieDetails'
-import MyBookings from './pages/MyBookings'
-import Seats from './pages/Seats'
-import Checkout from './pages/Checkout'
-
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Movies from "./pages/Movies";
+import MovieDetails from "./pages/MovieDetails";
+import MyBookings from "./pages/MyBookings";
+import Seats from "./pages/Seats";
+import Checkout from "./pages/Checkout";
+import AdminRoute from "./components/AdminRoute.jsx";
+import Dashboard from './pages/Dashboard.jsx'
 function App() {
   return (
     <>
@@ -24,6 +25,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <Dashboard/>
+              </AdminRoute>
+            }
+          />
+
           <Route path="/register" element={<Register />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
@@ -33,7 +43,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }

@@ -3,60 +3,44 @@ import { db } from "../db.js";
 import { requireAdmin } from "../middleware/auth.js";
 
 const router = Router();
-const GENRES = ["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Animation"];
+const GENRES = ["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Animation", "Fantasy"];
 const STATUSES = ["now_showing", "coming_soon", "ended"];
 
 function validateMoviePayload(body, { partial = false } = {}) {
   const errors = [];
   if (!partial || body.title !== undefined) {
-    if (
-      !body.title ||
-      typeof body.title !== "string" ||
-      body.title.trim().length < 2
-    )
+    if (!body.title || typeof body.title !== "string" || body.title.trim().length < 2)
       errors.push("title is required (min 2 characters).");
   }
   if (!partial || body.description !== undefined) {
-    if (
-      !body.description ||
-      typeof body.description !== "string" ||
-      body.description.trim().length < 10
-    )
+    if (!body.description || typeof body.description !== "string" || body.description.trim().length < 10)
       errors.push("description is required (min 10 characters).");
   }
   if (!partial || body.director !== undefined) {
-    if (
-      !body.director ||
-      typeof body.director !== "string" ||
-      body.director.trim().length < 2
-    )
+    if (!body.director || typeof body.director !== "string" || body.director.trim().length < 2)
       errors.push("director is required (min 2 characters).");
   }
+
   if (!partial || body.genre !== undefined) {
-    if (body.genre && !GENRES.includes(body.genre))
-      errors.push(`genre must be one of: ${GENRES.join(", ")}.`);
+    if (body.genre) {
+      if (Array.isArray(body.genre)) {
+        const hasInvalidGenre = body.genre.some((g) => !GENRES.includes(g));
+        if (hasInvalidGenre) {
+          errors.push(`all genres must be one of: ${GENRES.join(", ")}.`);
+        }
+      } else if (!GENRES.includes(body.genre)) {
+        errors.push(`genre must be one of: ${GENRES.join(", ")}.`);
+      }
+    }
   }
-  if (
-    body.price !== undefined &&
-    body.price !== "" &&
-    (Number.isNaN(Number(body.price)) || Number(body.price) < 0)
-  ) {
+
+  if (body.price !== undefined && body.price !== "" && (Number.isNaN(Number(body.price)) || Number(body.price) < 0)) {
     errors.push("price must be a non-negative number.");
   }
-  if (
-    body.duration !== undefined &&
-    body.duration !== "" &&
-    (Number.isNaN(Number(body.duration)) || Number(body.duration) < 1)
-  ) {
+  if (body.duration !== undefined && body.duration !== "" && (Number.isNaN(Number(body.duration)) || Number(body.duration) < 1)) {
     errors.push("duration must be a positive number (minutes).");
   }
-  if (
-    body.rating !== undefined &&
-    body.rating !== "" &&
-    (Number.isNaN(Number(body.rating)) ||
-      Number(body.rating) < 0 ||
-      Number(body.rating) > 10)
-  ) {
+  if (body.rating !== undefined && body.rating !== "" && (Number.isNaN(Number(body.rating)) || Number(body.rating) < 0 || Number(body.rating) > 10)) {
     errors.push("rating must be between 0 and 10.");
   }
   if (body.status && !STATUSES.includes(body.status))
@@ -66,20 +50,18 @@ function validateMoviePayload(body, { partial = false } = {}) {
 
 router.get("/", (req, res) => {
   const data = db.read();
-  const q = String(req.query.q || "")
-    .toLowerCase()
-    .trim();
+  const q = String(req.query.q || "").toLowerCase().trim();
   const genre = req.query.genre || "all";
   const status = req.query.status || "all";
 
   const filtered = data.movies.filter((m) => {
     const matchesQuery =
       !q ||
-      `${m.title} ${m.description} ${m.director} ${(m.cast || []).join(" ")}`
-        .toLowerCase()
-        .includes(q);
-    const matchesGenre = genre === "all" || m.genre === genre;
+      `${m.title} ${m.description} ${m.director} ${(m.cast || []).join(" ")}`.toLowerCase().includes(q);
+    
+    const matchesGenre = genre === "all" || (Array.isArray(m.genre) ? m.genre.includes(genre) : m.genre === genre);
     const matchesStatus = status === "all" || m.status === status;
+    
     return matchesQuery && matchesGenre && matchesStatus;
   });
 
@@ -89,9 +71,7 @@ router.get("/", (req, res) => {
 router.post("/", requireAdmin, (req, res) => {
   const errors = validateMoviePayload(req.body || {});
   if (errors.length)
-    return res
-      .status(400)
-      .json({ success: false, message: errors.join(" "), errors });
+    return res.status(400).json({ success: false, message: errors.join(" "), errors });
 
   const data = db.read();
   const now = new Date().toISOString();
@@ -100,15 +80,12 @@ router.post("/", requireAdmin, (req, res) => {
     id: db.nextId("movies"),
     title: req.body.title.trim(),
     description: req.body.description.trim(),
-    genre: req.body.genre || "Drama",
+    genre: req.body.genre || ["Drama"],
     director: req.body.director.trim(),
     cast: Array.isArray(req.body.cast) ? req.body.cast : [],
     duration: Number(req.body.duration) || 120,
     rating: Number(req.body.rating) || 0,
-    price:
-      req.body.price === "" || req.body.price === undefined
-        ? 150
-        : Number(req.body.price),
+    price: req.body.price === "" || req.body.price === undefined ? 150 : Number(req.body.price),
     releaseDate: req.body.releaseDate || "",
     status: req.body.status || "coming_soon",
     poster: req.body.poster || "",
@@ -128,9 +105,7 @@ router.get("/:id", (req, res) => {
   const id = Number(req.params.id);
   const m = data.movies.find((item) => item.id === id);
   if (!m)
-    return res
-      .status(404)
-      .json({ success: false, message: `Movie '${req.params.id}' not found.` });
+    return res.status(404).json({ success: false, message: `Movie '${req.params.id}' not found.` });
   res.json({ success: true, movie: m });
 });
 
@@ -139,15 +114,11 @@ router.put("/:id", requireAdmin, (req, res) => {
   const id = Number(req.params.id);
   const m = data.movies.find((item) => item.id === id);
   if (!m)
-    return res
-      .status(404)
-      .json({ success: false, message: `Movie '${req.params.id}' not found.` });
+    return res.status(404).json({ success: false, message: `Movie '${req.params.id}' not found.` });
 
   const errors = validateMoviePayload(req.body || {}, { partial: true });
   if (errors.length)
-    return res
-      .status(400)
-      .json({ success: false, message: errors.join(" "), errors });
+    return res.status(400).json({ success: false, message: errors.join(" "), errors });
 
   const allowed = [
     "title",
@@ -184,9 +155,7 @@ router.delete("/:id", requireAdmin, (req, res) => {
   const id = Number(req.params.id);
   const index = data.movies.findIndex((item) => item.id === id);
   if (index === -1)
-    return res
-      .status(404)
-      .json({ success: false, message: `Movie '${req.params.id}' not found.` });
+    return res.status(404).json({ success: false, message: `Movie '${req.params.id}' not found.` });
 
   const [removed] = data.movies.splice(index, 1);
   db.write(data);

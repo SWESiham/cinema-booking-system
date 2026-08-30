@@ -2,19 +2,20 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/common/Button";
-import {useAuth } from "../context/AuthContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 import api from "../services/api";
 
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [form, setForm] = useState({ email: "", password: "" });
-  const { login } = useAuth();
+  const { user, login } = useAuth();
+
   const handleChange = (e) => {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     if (!form.email || !form.password) {
@@ -29,12 +30,23 @@ const Login = () => {
     //   setError("Invalid email or password");
     //   return;
     // }
-      // login(user)
-      // navigate("/");
-    
+    // login(user)
+    // navigate("/");
+
     const res = await login(form.email, form.password);
-    res.success ? navigate('/') : setError(res.message);
+    console.log("user", res);
+    
+    if (res.success) {
+      if (user.role === "Admin") {
+        navigate("/admin");
+      }else{
+        navigate("/");
+      }
+    } else {
+        setError(res.message);
+      }
   };
+  // console.log("user", user);
   return (
     <>
       <div className="auth-page">

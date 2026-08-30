@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import { useAuth } from "../../context/AuthContext";
 const Footer = () => {
+  const { user } = useAuth();
   return (
     <footer className="footer">
       <div className="container footer__inner">
@@ -12,13 +14,27 @@ const Footer = () => {
           </div>
           <p>Your seat is waiting. Book in seconds, arrive to the story.</p>
         </div>
-
-        <div className="footer__col">
-          <h4>Explore</h4>
-          <Link to="/">Home</Link>
-          <Link to="/movies">Movies</Link>
-          <Link to="/my-bookings">My Bookings</Link>
-        </div>
+        {user?.role !== 'Admin' ? (
+          <>
+            <div className="footer__col">
+              <h4>Explore</h4>
+          
+            
+              <Link to="/">Home</Link>
+              <Link to="/movies">Movies</Link>
+              <Link to="/my-bookings">My Bookings</Link>
+            </div>
+          </>
+        ) : (
+            <>
+            <div className="footer__col">
+              <h4>Explore</h4>
+              <Link to="/">Home</Link>
+              <Link to="/admin">Dashboard</Link>
+            </div>
+          </>
+        )
+      }
         <div className="footer__col">
           <h4>Account</h4>
           <Link to="/login">Login</Link>
