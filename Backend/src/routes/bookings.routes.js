@@ -5,72 +5,43 @@ import { requireAuth, requireAdmin } from "../middleware/auth.js";
 const router = Router();
 const STATUSES = ["pending", "confirmed", "cancelled", "refunded"];
 
-router.post("/", requireAuth, (req, res) => {
-  const { showtimeId, seats } = req.body || {};
-
-  if (!showtimeId || !Array.isArray(seats) || seats.length === 0) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        message: "showtimeId and seats array are required.",
-      });
-  }
-
+router.post('/', requireAuth, (req, res) => {
   const data = db.read();
-  const showtime = (data.showtimes || []).find((s) => s.id === showtimeId);
-  if (!showtime)
-    return res
-      .status(404)
-      .json({ success: false, message: "Showtime not found." });
+  
+  const showtimeId = Number(req.body.showtimeId || req.body.showtime);
+  const movieId = Number(req.body.movieId || req.body.movie);
+  const seats = req.body.seats || [];
+  const totalPrice = Number(req.body.totalPrice || req.body.price || req.body.total || 0);
 
-  const movie = data.movies.find((m) => m.id === showtime.movieId);
-
-  const existingBooked = data.bookings
-    .filter((b) => b.showtimeId === showtimeId && b.status !== "cancelled")
-    .flatMap((b) => b.seats);
-
-  const conflict = seats.find((s) => existingBooked.includes(s));
-  if (conflict) {
-    return res
-      .status(409)
-      .json({
-        success: false,
-        message: `Seat ${conflict} is already booked for this show.`,
-      });
+  if (!showtimeId || seats.length === 0) {
+    return res.status(400).json({ success: false, message: 'Invalid booking data' });
   }
 
-  const totalPrice = seats.length * showtime.price;
+  const showtime = data.showtimes?.find(s => s.id === showtimeId) || {};
+  const movie = data.movies?.find(m => m.id === (movieId || showtime.movieId)) || {};
 
-  const booking = {
-    id: `b-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`,
+  const newBooking = {
+    id: db.nextId('bookings'),
     userId: req.user.id,
-    showtimeId: showtime.id,
-    movieId: movie.id,
-    movieTitle: movie.title,
-    movieImage: movie.poster || movie.backdrop,
-    cinema: showtime.cinema,
-    hall: showtime.hall,
-    date: showtime.date,
-    time: showtime.time,
-    seats,
-    pricePerSeat: showtime.price,
-    totalPrice,
-    status: "confirmed",
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    showtimeId: showtimeId,
+    movieId: movie.id || movieId,
+    movieTitle: req.body.movieTitle || movie.title || 'Unknown Movie', // ✨ بياخد الاسم من الفرونت
+    poster: req.body.poster || movie.poster || '',                     // ✨ بياخد الصورة من الفرونت
+    date: showtime.date || '',
+    time: showtime.time || '',
+    cinema: showtime.cinema || 'CineBook Downtown',
+    hall: showtime.hall || 'Hall 1',
+    seats: seats,
+    totalPrice: totalPrice,
+    status: 'pending', 
+    createdAt: new Date().toISOString()
   };
 
-  data.bookings.push(booking);
+  if (!data.bookings) data.bookings = [];
+  data.bookings.push(newBooking);
   db.write(data);
 
-  res
-    .status(201)
-    .json({
-      success: true,
-      message: `${seats.length} ticket(s) booked.`,
-      booking,
-    });
+  res.status(201).json({ success: true, message: 'Booking pending admin approval!', booking: newBooking });
 });
 
 router.get("/me", requireAuth, (req, res) => {
@@ -109,7 +80,10 @@ router.patch("/:bookingId/status", requireAuth, (req, res) => {
   }
 
   const data = db.read();
-  const booking = data.bookings.find((b) => b.id === req.params.bookingId);
+  
+  // ✨ التعديل هنا: حولنا الاتنين لـ String عشان المطابقة تنجح دايماً
+  const booking = data.bookings.find((b) => String(b.id) === String(req.params.bookingId));
+  
   if (!booking)
     return res
       .status(404)
@@ -136,7 +110,10 @@ router.patch("/:bookingId/status", requireAuth, (req, res) => {
 
 router.delete("/:bookingId", requireAuth, (req, res) => {
   const data = db.read();
-  const index = data.bookings.findIndex((b) => b.id === req.params.bookingId);
+  
+  // ✨ التعديل هنا كمان في دالة الحذف
+  const index = data.bookings.findIndex((b) => String(b.id) === String(req.params.bookingId));
+  
   if (index === -1)
     return res
       .status(404)

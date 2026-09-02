@@ -37,11 +37,10 @@ const Login = () => {
     console.log("user", res);
     
     if (res.success) {
-      if (user.role === "Admin") {
+      if (user.role === "Admin")
         navigate("/admin");
-      }else{
+      
         navigate("/");
-      }
     } else {
         setError(res.message);
       }

@@ -93,7 +93,7 @@ const MyBookings = () => {
               return (
                 <div className="booking-card ticket-notch" key={book.id} onClick={() => navigate(`/movies/${book.movieId}`)}>
                   <img
-                    src={book.movieImage}
+                    src={book.movieImage || book.poster}
                     alt={book.movieTitle}
                     className="booking-card__poster"
                     

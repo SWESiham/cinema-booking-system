@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import { mockMovies } from "../data/mockData";
-import Button from "../components/common/Button";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import MovieGrid from "./../components/movies/MovieGrid";
 import api from "../services/api";
-import "./Home.css";
-import { useState } from "react";
+import Button from "../components/common/Button";
 import Loader from "../components/common/Loader";
+import MovieCard from "../components/movies/MovieCard";
+import "./Home.css";
+
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,23 +15,27 @@ const Home = () => {
     const fetchMovies = async () => {
       try {
         const res = await api.get("/movies");
-        console.log(res.data);
         setMovies(res.data.movies);
-        setLoading(false);
       } catch (error) {
         setError("Failed to fetch movies");
+      } finally {
         setLoading(false);
       }
     };
     fetchMovies();
   }, []);
-  const nowShowing = movies.slice(0, 15);
-  const mMovies = movies[0];
- if (loading) return <div className="container movies-page"><Loader/></div>;
-  if (error) return <div className="container movies-page"><h2 style={{ color: 'red' }}>{error}</h2></div>;
-   return (
-    <>
-      <div className="home">
+
+  if (loading) return <div className="container movies-page"><Loader /></div>;
+  if (error) return <div className="container movies-page"><h2 style={{ color: "red" }}>{error}</h2></div>;
+
+  const nowShowingMovies = movies.filter((m) => m.status === "now_showing");
+  const comingSoonMovies = movies.filter((m) => m.status === "coming_soon");
+  
+  const mMovies = nowShowingMovies[0];
+
+  return (
+    <div className="home">
+      {mMovies && (
         <section
           className="hero"
           style={{ backgroundImage: `url(${mMovies.backdrop})` }}
@@ -46,7 +49,7 @@ const Home = () => {
               <span className="badge">★ {mMovies.rating}</span>
               <span className="badge">{mMovies.ageRating}</span>
               <span className="badge">{mMovies.duration} min</span>
-              <span className="badge">{mMovies.genre.join(" / ")}</span>
+              <span className="badge">{mMovies.genre?.join(" / ")}</span>
             </div>
 
             <div className="hero__actions">
@@ -59,36 +62,51 @@ const Home = () => {
             </div>
           </div>
         </section>
+      )}
 
-        <section className="container home__section">
-          <div className="home__section-head">
-            <h2 className="section-title">Now Showing</h2>
-            <Link to="/movies" className="home__see-all">
-              See all →
-            </Link>
-          </div>
-          <MovieGrid movies={nowShowing} />
-        </section>
+      <section className="container home__section">
+        <div className="home__section-head">
+          <h2 className="section-title">Now Showing</h2>
+          <Link to="/movies" className="home__see-all">
+            See all →
+          </Link>
+        </div>
+        <div className="movies-grid">
+          {nowShowingMovies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </div>
+      </section>
 
-        <section className="container home__perks">
-          <div className="perk">
-            <span className="perk__icon">🎟️</span>
-            <h3>Instant Booking</h3>
-            <p>Pick your seats and get your ticket in under a minute.</p>
-          </div>
-          <div className="perk">
-            <span className="perk__icon">🍿</span>
-            <h3>Premium Halls</h3>
-            <p>IMAX, VIP recliners, and Dolby sound across our cinemas.</p>
-          </div>
-          <div className="perk">
-            <span className="perk__icon">📍</span>
-            <h3>Multiple Locations</h3>
-            <p>Downtown, Mall of Arabia, and Nile View — always nearby.</p>
-          </div>
-        </section>
-      </div>
-    </>
+      <section className="container home__section">
+        <div className="home__section-head">
+          <h2 className="section-title">Coming Soon</h2>
+        </div>
+        <div className="movies-grid">
+          {comingSoonMovies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </div>
+      </section>
+
+      <section className="container home__perks">
+        <div className="perk">
+          <span className="perk__icon">🎟️</span>
+          <h3>Instant Booking</h3>
+          <p>Pick your seats and get your ticket in under a minute.</p>
+        </div>
+        <div className="perk">
+          <span className="perk__icon">🍿</span>
+          <h3>Premium Halls</h3>
+          <p>IMAX, VIP recliners, and Dolby sound across our cinemas.</p>
+        </div>
+        <div className="perk">
+          <span className="perk__icon">📍</span>
+          <h3>Multiple Locations</h3>
+          <p>Downtown, Mall of Arabia, and Nile View — always nearby.</p>
+        </div>
+      </section>
+    </div>
   );
 };
 

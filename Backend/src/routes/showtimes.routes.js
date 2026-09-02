@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { db } from '../db.js'
+import { requireAdmin } from './../middleware/auth.js';
 
 const router = Router()
 
@@ -17,7 +18,10 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const data = db.read()
-  const showtime = (data.showtimes || []).find((s) => s.id === req.params.id)
+  const showtimeId = Number(req.params.id)
+  
+  const showtime = (data.showtimes || []).find((s) => s.id === showtimeId)
+  
   if (!showtime) {
     return res.status(404).json({ success: false, message: 'Showtime not found' })
   }
@@ -37,5 +41,20 @@ router.get('/:id', (req, res) => {
     bookedSeats,
   })
 })
-
+router.post("/", requireAdmin, (req, res) => {
+  const data = db.read();
+  const newShowtime = {
+    id: db.nextId("showtimes"),
+    movieId: Number(req.body.movieId),
+    date: req.body.date,
+    time: req.body.time,
+    hall: req.body.hall,
+    price: Number(req.body.price) || 150,
+    cinema: "CineBook Downtown"
+  };
+  
+  data.showtimes.push(newShowtime);
+  db.write(data);
+  res.status(201).json({ success: true, showtime: newShowtime });
+});
 export default router

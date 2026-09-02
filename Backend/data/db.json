@@ -299,28 +299,9 @@
       "language": "English",
       "director": "Leo Wild",
       "price": 140,
-      "status": "now_showing",
+      "status": "coming_soon",
       "createdAt": "2026-08-28T18:44:52.651Z",
-      "updatedAt": "2026-08-28T18:44:52.651Z"
-    },
-    {
-      "id": 16,
-      "title": "Midnight Drift",
-      "genre": [
-        "Action"
-      ],
-      "duration": 108,
-      "rating": 6.9,
-      "ageRating": "PG-13",
-      "poster": "https://picsum.photos/seed/drift/400/600",
-      "backdrop": "https://picsum.photos/seed/drift-wide/1200/500",
-      "description": "Underground street racers go head-to-head in Tokyo's dangerous mountain passes.",
-      "language": "Japanese",
-      "director": "Kenji Sato",
-      "price": 200,
-      "status": "now_showing",
-      "createdAt": "2026-08-28T18:44:52.651Z",
-      "updatedAt": "2026-08-28T18:44:52.651Z"
+      "updatedAt": "2026-09-01T16:27:48.443Z"
     },
     {
       "id": 17,
@@ -356,9 +337,9 @@
       "language": "English",
       "director": "Samira Ahmed",
       "price": 160,
-      "status": "now_showing",
+      "status": "coming_soon",
       "createdAt": "2026-08-28T18:44:52.651Z",
-      "updatedAt": "2026-08-28T18:44:52.651Z"
+      "updatedAt": "2026-09-01T16:27:34.291Z"
     },
     {
       "id": 19,
@@ -377,9 +358,9 @@
       "language": "English",
       "director": "Chris Bay",
       "price": 120,
-      "status": "now_showing",
+      "status": "coming_soon",
       "createdAt": "2026-08-28T18:44:52.651Z",
-      "updatedAt": "2026-08-28T18:44:52.651Z"
+      "updatedAt": "2026-09-01T16:27:18.944Z"
     },
     {
       "id": 20,
@@ -397,9 +378,9 @@
       "language": "English",
       "director": "Nora Ephron",
       "price": 150,
-      "status": "now_showing",
+      "status": "coming_soon",
       "createdAt": "2026-08-28T18:44:52.651Z",
-      "updatedAt": "2026-08-28T18:44:52.651Z"
+      "updatedAt": "2026-09-01T16:27:04.854Z"
     },
     {
       "id": 21,
@@ -420,9 +401,33 @@
       "poster": "https://rnscinemas.com/image/6a343b758f33215c7905c193",
       "backdrop": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToThIwKGIlLQgiRK1fwDslpnoGBPw5cbF1-1v1ez7SfQ&s=10",
       "ageRating": "PG",
-      "language": "English",
+      "language": "Arabic",
       "createdAt": "2026-08-30T20:54:09.923Z",
-      "updatedAt": "2026-08-30T20:54:09.923Z"
+      "updatedAt": "2026-09-01T16:11:06.904Z"
+    },
+    {
+      "id": 22,
+      "title": "Rise of the guardian",
+      "description": "Jack Frost emerges from a frozen pond with amnesia and finds himself invisible to the mortal realm. While he knows the Man in the Moon played a role in his transformation, the Man does not tell him why he has been changed. Three centuries later, Nicholas St. North learns of the return of Pitch Black, who threatens to plague children with nightmares. North rallies his fellow Guardians, E. Aster Bunnymund, Sanderson Mansnoozie, and Toothiana, and they discover that Jack has been chosen to join their ranks. Jack is kidnapped by Bunny and transported to the North Pole, where he learns from North that every Guardian has a \"center\", something they foster in children. Jack knows nothing of his center and resists the call to become a Guardian.",
+      "genre": [
+        "Animation",
+        "Family",
+        "Adventure",
+        "Fantasy"
+      ],
+      "director": "Peter Ramsey",
+      "cast": [],
+      "duration": 95,
+      "rating": 9.5,
+      "price": 120,
+      "releaseDate": "",
+      "status": "now_showing",
+      "poster": "https://i.pinimg.com/736x/3f/e4/82/3fe48276e43f277c3db4d2d648b84ed6.jpg",
+      "backdrop": "https://i.pinimg.com/1200x/46/cc/4c/46cc4cbf202378fd730fbb1f4159dd7f.jpg",
+      "ageRating": "PG",
+      "language": "English",
+      "createdAt": "2026-09-01T16:23:22.150Z",
+      "updatedAt": "2026-09-01T16:26:07.240Z"
     }
   ],
   "genres": [
@@ -498,7 +503,7 @@
       "email": "siham@example.com",
       "password": "c1756efc71b1ba81b94af76231d0fcd2:0b7b57f9c4958234ecc32eecaade9bb4e6f02d855fe91e1d4b6855e22e06d3b907d5b5e907a9c24cda52204648bd4517039290d5b394dddff1c0027ca96fed2a",
       "role": "Customer",
-      "status": "Active",
+      "status": "Suspended",
       "joined": "Aug 26, 2026",
       "bio": ""
     },
@@ -649,55 +654,54 @@
       "date": "2026-08-27",
       "time": "18:00",
       "price": 150
+    },
+    {
+      "id": 1,
+      "movieId": 1,
+      "date": "2026-09-24",
+      "time": "21:00",
+      "hall": "VIP",
+      "price": 150,
+      "cinema": "CineBook Downtown"
+    },
+    {
+      "id": 2,
+      "movieId": 21,
+      "date": "2026-09-17",
+      "time": "22:00",
+      "hall": "VIP",
+      "price": 150,
+      "cinema": "CineBook Downtown"
+    },
+    {
+      "id": 3,
+      "movieId": 21,
+      "date": "2026-09-17",
+      "time": "08:00",
+      "hall": "VIP",
+      "price": 150,
+      "cinema": "CineBook Downtown"
+    },
+    {
+      "id": 4,
+      "movieId": 21,
+      "date": "2026-09-09",
+      "time": "08:00",
+      "hall": "VIP",
+      "price": 150,
+      "cinema": "CineBook Downtown"
+    },
+    {
+      "id": 5,
+      "movieId": 22,
+      "date": "2026-09-17",
+      "time": "16:00",
+      "hall": "VIP",
+      "price": 120,
+      "cinema": "CineBook Downtown"
     }
   ],
   "bookings": [
-    {
-      "id": "b-mtelqn0x-hems",
-      "userId": 3,
-      "showtimeId": "s2",
-      "movieId": 1,
-      "movieTitle": "Nebula Horizon",
-      "hall": 2,
-      "seats": [
-        "E5",
-        "E6"
-      ],
-      "pricePerSeat": 240,
-      "totalPrice": 480,
-      "status": "pending",
-      "createdAt": "2026-08-29T16:35:39.153Z",
-      "updatedAt": "2026-08-30T20:20:20.797Z"
-    },
-    {
-      "id": "b-mtem876k-c5lm",
-      "userId": 3,
-      "showtimeId": "s6",
-      "movieId": 4,
-      "movieTitle": "Dilwale's Journey",
-      "movieImage": "https://picsum.photos/seed/dilwale/400/600",
-      "cinema": "CineBook Downtown",
-      "hall": 1,
-      "date": "2026-08-25",
-      "time": "19:00",
-      "seats": [
-        "A1",
-        "A2",
-        "A3",
-        "A4",
-        "A5",
-        "A6",
-        "A7",
-        "A8",
-        "A9",
-        "A10"
-      ],
-      "pricePerSeat": 180,
-      "totalPrice": 1800,
-      "status": "pending",
-      "createdAt": "2026-08-29T16:49:18.428Z",
-      "updatedAt": "2026-08-30T20:56:29.300Z"
-    },
     {
       "id": "b-mteoxe2r-koa2",
       "userId": 3,
@@ -738,6 +742,48 @@
       "status": "confirmed",
       "createdAt": "2026-08-29T18:46:08.832Z",
       "updatedAt": "2026-08-29T18:46:08.832Z"
+    },
+    {
+      "id": 6,
+      "userId": 3,
+      "showtimeId": 4,
+      "movieId": 21,
+      "movieTitle": "Toy Story 5",
+      "poster": "https://rnscinemas.com/image/6a343b758f33215c7905c193",
+      "date": "2026-09-09",
+      "time": "08:00",
+      "cinema": "CineBook Downtown",
+      "hall": "VIP",
+      "seats": [
+        "D5",
+        "D4"
+      ],
+      "totalPrice": 300,
+      "status": "confirmed",
+      "createdAt": "2026-09-01T15:44:56.083Z",
+      "updatedAt": "2026-09-01T16:10:13.338Z"
+    },
+    {
+      "id": 7,
+      "userId": 3,
+      "showtimeId": 5,
+      "movieId": 22,
+      "movieTitle": "Rise of the guardian",
+      "poster": "https://i.pinimg.com/736x/3f/e4/82/3fe48276e43f277c3db4d2d648b84ed6.jpg",
+      "date": "2026-09-17",
+      "time": "16:00",
+      "cinema": "CineBook Downtown",
+      "hall": "VIP",
+      "seats": [
+        "B4",
+        "B5",
+        "B6",
+        "B7"
+      ],
+      "totalPrice": 480,
+      "status": "confirmed",
+      "createdAt": "2026-09-02T15:01:37.784Z",
+      "updatedAt": "2026-09-02T15:02:23.857Z"
     }
   ]
 }

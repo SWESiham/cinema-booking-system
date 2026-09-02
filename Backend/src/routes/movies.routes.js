@@ -3,7 +3,7 @@ import { db } from "../db.js";
 import { requireAdmin } from "../middleware/auth.js";
 
 const router = Router();
-const GENRES = ["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Animation", "Fantasy"];
+const GENRES = ["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Animation", "Fantasy", "Family", "Adventure"];
 const STATUSES = ["now_showing", "coming_soon", "ended"];
 
 function validateMoviePayload(body, { partial = false } = {}) {
@@ -21,15 +21,11 @@ function validateMoviePayload(body, { partial = false } = {}) {
       errors.push("director is required (min 2 characters).");
   }
 
+  // التعديل: السماح بأي عدد من التصنيفات وأي اسم بدون التقيد بقائمة محددة
   if (!partial || body.genre !== undefined) {
     if (body.genre) {
-      if (Array.isArray(body.genre)) {
-        const hasInvalidGenre = body.genre.some((g) => !GENRES.includes(g));
-        if (hasInvalidGenre) {
-          errors.push(`all genres must be one of: ${GENRES.join(", ")}.`);
-        }
-      } else if (!GENRES.includes(body.genre)) {
-        errors.push(`genre must be one of: ${GENRES.join(", ")}.`);
+      if (!Array.isArray(body.genre) && typeof body.genre !== 'string') {
+        errors.push("genre must be a string or an array of strings.");
       }
     }
   }

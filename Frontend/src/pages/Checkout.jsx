@@ -16,8 +16,8 @@ const Checkout = () => {
   const [isSubmitting, setIsSubmiting] = useState(false);
   const movie = state.movie;
   const swtime = state.swtime;
-  console.log("movieee",movie , swtime);
-  
+  console.log("movieee", movie, swtime);
+
   if (!seats || seats.length === 0) {
     return <Navigate to="/movies" replace />;
   }
@@ -27,11 +27,14 @@ const Checkout = () => {
     setIsSubmiting(true);
     try {
       await api.post("/bookings", {
-        showtimeId,
-        seats,
-        totalAmount,
+        showtimeId: swtime.id,
+        movieId: movie.id, 
+        seats: seats, 
+        totalPrice: totalAmount, 
+        movieTitle: movie.title, 
+        poster: movie.poster || movie.backdrop,
       });
-      navigate('/my-bookings', { state: { justBooked: true } });
+      navigate("/my-bookings", { state: { justBooked: true } });
     } catch (error) {
       console.error(error);
       setIsSubmiting(false);
