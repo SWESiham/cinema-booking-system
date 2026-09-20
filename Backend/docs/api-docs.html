@@ -487,7 +487,7 @@
   <script>
     (function () {
       const $ = (sel, el = document) => el.querySelector(sel);
-
+      const baseUrlInput = $('#baseUrl');
       const onHttp = location.protocol.startsWith('http');
       const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
       baseUrlInput.value = onHttp && (!isLocal || location.port === '4000')
