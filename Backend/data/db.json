@@ -516,6 +516,66 @@
       "status": "Active",
       "joined": "Aug 29, 2026",
       "bio": ""
+    },
+    {
+      "id": 4,
+      "name": "siham",
+      "email": "s@gg.c",
+      "password": "80622ddff8a51e3a42f6fd0de3c475c4:8b30ecb008dfdaa94da6baa5da9b0aed1378b823634d5823e2796860b6300edf941bd61f1da9719dc0f8d6c2b8da21ebb49d2c058c59addec1ca346cb737f800",
+      "role": "Customer",
+      "status": "Active",
+      "joined": "Sep 11, 2026",
+      "bio": ""
+    },
+    {
+      "id": 5,
+      "name": "siham",
+      "email": "seham@gmail.com",
+      "password": "4b5e6d6148df9e8e4a35b67c5604024b:f5f3b360d4033e1de6db46327ef8b5e2aa35c640d88f2235de4aa1a9539276d2628fa5b17e69c2fccef5a959f3c75e760d8cfbae6c24f8cf4db5df9eff78a7d0",
+      "role": "Customer",
+      "status": "Active",
+      "joined": "Sep 11, 2026",
+      "bio": ""
+    },
+    {
+      "id": 6,
+      "name": "siham",
+      "email": "seh@gmail.com",
+      "password": "4d04b925b39ec0748aa948591c51c973:156abd8fae71ccd7ee2089f34a88a03076c724972c4aa993683f3a824d320ede7d250dbc51c59530cf80bc7408ab0499c46ee07e9a2245897374ac1b413c6ec4",
+      "role": "Customer",
+      "status": "Active",
+      "joined": "Sep 11, 2026",
+      "bio": ""
+    },
+    {
+      "id": 7,
+      "name": "Hassan Said",
+      "email": "hassan@gmail.com",
+      "password": "fe17c70f3ec628ef7b98364b38bdc24b:028c530ad65b74d62b1f2e09f5464172f297048da54a787f5d17f6cae2f31e8c5aacef0a7497a1ee6e6103c37d2ee793ef14cf6c0f83c4f517ebee92704e17a9",
+      "role": "Customer",
+      "status": "Active",
+      "joined": "Sep 20, 2026",
+      "bio": ""
+    },
+    {
+      "id": 8,
+      "name": "Hassan Said",
+      "email": "hassa@gmail.com",
+      "password": "413e0c0c37d98c9b66ea5782e4b795ec:4630b8b4b127adb1994341707bf82dd0fa6f85afbd806d18e3e365803ab3c0312536915f13a31ef984479b232a8973dc75ff91f1064eaf36c30ea0d5839fa6cc",
+      "role": "Customer",
+      "status": "Active",
+      "joined": "Sep 20, 2026",
+      "bio": ""
+    },
+    {
+      "id": 9,
+      "name": "Mona Saied",
+      "email": "mona@gmail.com",
+      "password": "e0a08611307e05240ace96507bce208c:72e52a4fa53bf76ab6a114b3ff26b6ca88b771e0937eeaac50613a76479f874c740e165188e7d87c3a60c2eba8cb267b634e74937e4a0ecf6545d02aad10b828",
+      "role": "Customer",
+      "status": "Active",
+      "joined": "Sep 20, 2026",
+      "bio": ""
     }
   ],
   "halls": {
@@ -699,6 +759,15 @@
       "hall": "VIP",
       "price": 120,
       "cinema": "CineBook Downtown"
+    },
+    {
+      "id": 6,
+      "movieId": 1,
+      "date": "2026-09-17",
+      "time": "20:49",
+      "hall": "Hall 2",
+      "price": 150,
+      "cinema": "CineBook Downtown"
     }
   ],
   "bookings": [
@@ -784,6 +853,66 @@
       "status": "confirmed",
       "createdAt": "2026-09-02T15:01:37.784Z",
       "updatedAt": "2026-09-02T15:02:23.857Z"
+    },
+    {
+      "id": 8,
+      "userId": 3,
+      "showtimeId": 5,
+      "movieId": 22,
+      "movieTitle": "Rise of the guardian",
+      "poster": "https://i.pinimg.com/736x/3f/e4/82/3fe48276e43f277c3db4d2d648b84ed6.jpg",
+      "date": "2026-09-17",
+      "time": "16:00",
+      "cinema": "CineBook Downtown",
+      "hall": "VIP",
+      "seats": [
+        "C5",
+        "C6"
+      ],
+      "totalPrice": 240,
+      "status": "cancelled",
+      "createdAt": "2026-09-10T20:25:51.283Z",
+      "updatedAt": "2026-09-20T19:54:53.318Z"
+    },
+    {
+      "id": 9,
+      "userId": 3,
+      "showtimeId": 5,
+      "movieId": 22,
+      "movieTitle": "Rise of the guardian",
+      "poster": "https://i.pinimg.com/736x/3f/e4/82/3fe48276e43f277c3db4d2d648b84ed6.jpg",
+      "date": "2026-09-17",
+      "time": "16:00",
+      "cinema": "CineBook Downtown",
+      "hall": "VIP",
+      "seats": [
+        "E4",
+        "E5"
+      ],
+      "totalPrice": 240,
+      "status": "cancelled",
+      "createdAt": "2026-09-11T14:58:25.044Z",
+      "updatedAt": "2026-09-20T19:54:47.844Z"
+    },
+    {
+      "id": 10,
+      "userId": 3,
+      "showtimeId": 1,
+      "movieId": 1,
+      "movieTitle": "Nebula Horizon",
+      "poster": "https://picsum.photos/seed/nebula/400/600",
+      "date": "2026-09-24",
+      "time": "21:00",
+      "cinema": "CineBook Downtown",
+      "hall": "VIP",
+      "seats": [
+        "D5",
+        "D4"
+      ],
+      "totalPrice": 300,
+      "status": "confirmed",
+      "createdAt": "2026-09-20T19:56:03.463Z",
+      "updatedAt": "2026-09-20T19:58:50.206Z"
     }
   ]
 }

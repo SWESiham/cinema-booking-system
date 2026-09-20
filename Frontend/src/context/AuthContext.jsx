@@ -29,7 +29,11 @@ export const AuthProvider = ({ children }) => {
     // setUser(userData);
     try {
       const res = await api.post('/auth/login', {email,password});
-      const { user: lUser, token: lToken } = res.data 
+      const { user: lUser, token: lToken } = res.data;
+      if (user?.status === "Suspended") {
+      alert("Your account has been suspended by the administration.");
+      return;
+    }
       setUser(lUser);
       setToken(lToken);
       localStorage.setItem('token',lToken)
@@ -46,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await api.post('/auth/register', { name : fullname,email,password });
       const { user: lUser, token: lToken } = res.data 
-      if (user.status === "Suspended") {
+      if (user?.status === "Suspended") {
       alert("Your account has been suspended by the administration.");
       return;
     }

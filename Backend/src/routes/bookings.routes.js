@@ -111,7 +111,6 @@ router.patch("/:bookingId/status", requireAuth, (req, res) => {
 router.delete("/:bookingId", requireAuth, (req, res) => {
   const data = db.read();
   
-  // ✨ التعديل هنا كمان في دالة الحذف
   const index = data.bookings.findIndex((b) => String(b.id) === String(req.params.bookingId));
   
   if (index === -1)

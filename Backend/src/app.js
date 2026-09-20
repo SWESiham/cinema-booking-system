@@ -86,7 +86,9 @@ app.get("/api/stats/admin", (req, res) => {
     },
   });
 });
-
+app.get("/docs/api-data.js", (_req, res) =>
+  res.sendFile(path.join(__dirname, "..", "docs", "api-data.js"))
+);
 app.use("/api/auth", authRoutes);
 app.use("/api/genres", genresRoutes);
 app.use("/api/showtimes", showtimesRoutes);

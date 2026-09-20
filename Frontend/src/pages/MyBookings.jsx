@@ -11,7 +11,7 @@ const MyBookings = () => {
   const location = useLocation();
   const [showAlert, setShowAlert] = useState(location.state?.justBooked);
   const navigate = useNavigate();
-  const handleCancel = async (bookingId) => {
+  const handleCancel = async (e,bookingId) => {
     e.stopPropagation();
     try {
       await api.patch(`/bookings/${bookingId}/status`, { status: "cancelled" });
@@ -131,7 +131,7 @@ const MyBookings = () => {
                     <Button
                       variant="outline-danger"
                       size="sm"
-                      onClick={() => handleCancel(book.id)}
+                      onClick={(e) => handleCancel(e,book.id)}
                     >
                       Cancel
                     </Button>
