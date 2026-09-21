@@ -10,7 +10,6 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
-  const mMovies = nowShowingMovies[0];
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -31,6 +30,7 @@ const Home = () => {
   const safeMovies = Array.isArray(movies) ? movies : [];
   const nowShowingMovies = safeMovies.filter((m) => m.status === "now_showing");
   const comingSoonMovies = safeMovies.filter((m) => m.status === "coming_soon");
+  const mMovies = nowShowingMovies[0];
 
   if (loading)
     return (
