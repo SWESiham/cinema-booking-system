@@ -20,10 +20,6 @@ app.disable("x-powered-by");
 
 app.use(cors({
   origin: true,
-  origin: [
-    'https://cinema-booking-system-n7zn-3zm4yqkst-sihams-projects-fc2e78b5.vercel.app', 
-    'http://localhost:5173' 
-  ],
   credentials: true
 }));
 app.use(express.json({ limit: "1mb" }));
