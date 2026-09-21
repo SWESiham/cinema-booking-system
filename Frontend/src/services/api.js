@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL  ||  "http://localhost:4000/api" 
+const BASE_URL = import.meta.env.VITE_API_URL || "https://cinema-booking-system-ikd1o5k08-sihams-projects-fc2e78b5.vercel.app/api/" ||  "http://localhost:4000/api" 
 
 const api = axios.create({
     baseURL:BASE_URL,
