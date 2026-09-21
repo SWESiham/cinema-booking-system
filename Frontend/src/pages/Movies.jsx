@@ -11,20 +11,19 @@ const Movies = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   useEffect(() => {
-    const fetchMovies = async() => {
-      try {
-        const res = await api.get('/movies');
-        console.log(res.data);
-        setMovies(res.data.movies);
-        setLoading(false);
-        
-      } catch (error) {
-        setError('Failed to fetch movies');
-        setLoading(false);
-      }
-    };
-    fetchMovies();
-  }, []);
+  const fetchMovies = async () => {
+    try {
+      const res = await api.get('/movies');
+      const dataArray = res.data.movies || res.data;
+      setMovies(Array.isArray(dataArray) ? dataArray : []);
+    } catch (error) {
+      setError('Failed to fetch movies');
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchMovies();
+}, []);
   const allGenres = useMemo(() => {
     return ["All", ...new Set(movies.flatMap((m) => m.genre))];
   },[movies])

@@ -10,12 +10,15 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+  const mMovies = nowShowingMovies[0];
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         const res = await api.get("/movies");
-        setMovies(res.data.movies);
+
+        const dataArray = res.data.movies || res.data;
+        setMovies(Array.isArray(dataArray) ? dataArray : []);
       } catch (error) {
         setError("Failed to fetch movies");
       } finally {
@@ -25,13 +28,22 @@ const Home = () => {
     fetchMovies();
   }, []);
 
-  if (loading) return <div className="container movies-page"><Loader /></div>;
-  if (error) return <div className="container movies-page"><h2 style={{ color: "red" }}>{error}</h2></div>;
+  const safeMovies = Array.isArray(movies) ? movies : [];
+  const nowShowingMovies = safeMovies.filter((m) => m.status === "now_showing");
+  const comingSoonMovies = safeMovies.filter((m) => m.status === "coming_soon");
 
-  const nowShowingMovies = movies.filter((m) => m.status === "now_showing");
-  const comingSoonMovies = movies.filter((m) => m.status === "coming_soon");
-  
-  const mMovies = nowShowingMovies[0];
+  if (loading)
+    return (
+      <div className="container movies-page">
+        <Loader />
+      </div>
+    );
+  if (error)
+    return (
+      <div className="container movies-page">
+        <h2 style={{ color: "red" }}>{error}</h2>
+      </div>
+    );
 
   return (
     <div className="home">
